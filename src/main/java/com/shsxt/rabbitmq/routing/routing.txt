@@ -1,0 +1,15 @@
+1. 先启动客户端ReceiveLogsDirect.java main方法,启动前添加error warn info参数，
+	这时Exchange会通过error warn info这三个routing key跟Queue关联
+2. 在启动客户端ReceiveLogsDirect.java main方法, 启动前添加error参数，
+	这时Exchange会通过error这个routing key跟另外的Queue关联
+3. 使用两个控制台分别查看两个进程
+
+
+4. 在启动服务端EmitLogDirect main方法
+	
+5. 查看结果
+	--服务端控制台：输入warn#这是warn信息（前面是routingkey后面是消息内容）
+		这时会有一个控制台打印： [x] Received 'warn':'这是warn信息'；
+	--服务端控制台：输入error#这是error信息（前面是routingkey后面是消息内容）
+		这时会客户端控制台都会打印： [x] Received 'error':'这是error信息'；
+	--这说明direct的exchange需要全匹配才能发送

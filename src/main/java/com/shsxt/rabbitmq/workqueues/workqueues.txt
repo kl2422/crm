@@ -1,0 +1,8 @@
+1. 先启动客户端Worker.java main方法
+2. 在启动客户端Worker.java main方法
+3. 使用两个控制台分别查看两个进程
+4. 启动服务端NewTask.java main方法发送消息
+5. 查看结果
+	--NewTask的main控制台输入内容
+	--这时会看到worker1和worker2会交替打印消息，
+	这说明一个消息均匀分配给两个消费者

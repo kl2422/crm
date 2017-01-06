@@ -1,0 +1,8 @@
+1. 先启动服务端EmitLog.java main方法, 因为它实现了三套路由规则logs.debug.one,logs.debug.two,logs.info.one
+2. 启动ReceiveLogsTopic.java main方法, 获取路由规则为logs.*.one消息
+3. 启动ReceiveLogsTopic2.java main方法, 获取路由规则为logs.debug.*消息
+3. 使用三个控制台分别查看三个进程
+4. 查看结果
+	--EmitLog打印
+	--ReceiveLogsTopic打印的是：logs.debug.one和logs.info.one消息
+	--ReceiveLogsTopic2打印的是：logs.debug.one和logs.debug.two消息

@@ -1,0 +1,8 @@
+1. 先启动客户端ReceiveLogs.java main方法
+2. 在启动客户端ReceiveLogs2.java main方法
+3. 使用两个控制台分别查看两个进程
+4. 启动服务端EmitLog.java main方法发送消息
+5. 查看结果
+	--EmitLog的main控制台输入内容
+	--这时会看到ReceiveLogs和ReceiveLogs2会同时打印消息，
+	这说明一个消息同时分配给两个甚至多个队列，这就是广播/订阅模式

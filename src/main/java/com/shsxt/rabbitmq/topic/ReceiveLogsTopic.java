@@ -1,0 +1,36 @@
+package com.shsxt.rabbitmq.topic;
+import com.rabbitmq.client.*;
+
+import java.io.IOException;
+
+public class ReceiveLogsTopic {
+	private static final String EXCHANGE_NAME = "topic_logs";
+
+	public static void main(String[] argv) throws Exception {
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("localhost");
+		Connection connection = factory.newConnection();
+		
+		Channel channel = connection.createChannel();
+		String queueName = "topic_logs_logs1";// 定义"topic_logs_logs1"的Queue
+		// 声明队列
+        channel.queueDeclare(queueName, false, false, false, null);
+        // 设置exchange类型为topic:会把消息路由到那些binding key与routing key按规定匹配或者模糊匹配的Queue中
+		channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+		// 设置路由规则匹配log.*.one下的某个消息
+		String routingKey = "logs.*.one";
+		channel.queueBind(queueName, EXCHANGE_NAME, routingKey);
+
+		System.out.println(" [*]-1 Waiting for messages. ");
+
+		Consumer consumer = new DefaultConsumer(channel) {
+			@Override
+			public void handleDelivery(String consumerTag, Envelope envelope,
+					AMQP.BasicProperties properties, byte[] body) throws IOException {
+				String message = new String(body, "UTF-8");
+				System.out.println(" [x] Received '" + envelope.getRoutingKey() + "':'" + message + "'");
+			}
+		};
+		channel.basicConsume(queueName, true, consumer);
+	}
+}

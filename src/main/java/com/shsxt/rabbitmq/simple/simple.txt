@@ -1,0 +1,6 @@
+1. 先启动服务端Send.java main方法
+2. 启动Receive.java main方法
+3. 使用两个控制台分别查看两个进程
+4. 查看结果
+	--Send的main控制台输入内容
+	--Receive的main控制查看接收的内容
